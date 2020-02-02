@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useTable, useSortBy } from "react-table";
-import ObservationForm from "./components/ObservationForm";
 import observationService from "./services/observations";
 
 const Styles = styled.div`
@@ -174,6 +173,12 @@ const App = () => {
 
   return (
     <Styles>
+      <pre>
+        <code>
+          Clicking on the header sorts the column in
+          ascending or decending order !
+        </code>
+      </pre>
       <h1>Bird Observation Table</h1>
       <Table columns={columns} data={data} />
       <h2>Add new observation</h2>

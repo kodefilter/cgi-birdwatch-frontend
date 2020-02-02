@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = "https://whispering-tundra-87610.herokuapp.com/api/observations"
+const baseUrl = "/observations"
 
 const getAll = () => {
     const request =  axios.get(baseUrl)
@@ -11,5 +11,7 @@ const create = newObject => {
     return request.then(response => response.data)  
 }
 
+//deleting, editing and getting single observation 
+//was not on the requirement but can be implemented very easily
 
 export default { getAll, create }
