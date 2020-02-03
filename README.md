@@ -1,5 +1,8 @@
 # PROJECT BIRD WATCH FRONTEND
 
+This project was created with create-react-app
+Here I am using [axios](https://www.npmjs.com/package/axios) to fetch the data from the backend and [react-table](https://www.npmjs.com/package/react-table) to populate the data on the table.
+
 ## Requirements
 
 For development, you will only need Node.js installed on your environement.
@@ -71,6 +74,3 @@ A common way to update is by doing
     $ npm prune
     $ npm install
     
-## Libraries
-This project was created with create-react-app
-Here I am using [axios](https://www.npmjs.com/package/axios) to fetch the data from the backend and [react-table](https://www.npmjs.com/package/react-table) to populate the data on the table.
