@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useTable, useSortBy } from "react-table";
 import observationService from "./services/observations";
+import "./App.css";
 
 const Styles = styled.div`
   padding: 1rem;
@@ -97,9 +98,9 @@ function Table({ columns, data }) {
 }
 
 const App = () => {
-  const [observations, setObservations] = useState([]);
+  const [observations, setObservations] = useState([{}]);
   const [newName, setNewName] = useState("");
-  const [newRarity, setNewRarity] = useState("");
+  const [newRarity, setNewRarity] = useState("common");
   const [newNotes, setNewNotes] = useState("");
 
   useEffect(() => {
@@ -123,12 +124,10 @@ const App = () => {
       .then(addedObservation => {
         setObservations(observations.concat(addedObservation));
         setNewName("");
-        setNewRarity("");
         setNewNotes("");
       })
       .catch(error => {
         setNewName("");
-        setNewRarity("");
         setNewNotes("");
       });
 
@@ -172,44 +171,31 @@ const App = () => {
   const data = React.useMemo(() => observations, [observations]);
 
   return (
-    <Styles>
-      <pre>
-        <code>
-          Clicking on the header sorts the column in
-          ascending or decending order !
-        </code>
-      </pre>
-      <h1>Bird Observation Table</h1>
-      <Table columns={columns} data={data} />
-      <h2>Add new observation</h2>
-      <form onSubmit={addObservation}>
-        <div>
-          <h3>Name</h3>
-          <input value={newName} onChange={handleNameChange} />
+    <div class="main-container">
+      <Styles>
+        <p>
+          Clicking on the header sorts the column in ascending or decending
+          order !
+        </p>
+        <h1>Bird Observation Table</h1>
+        <Table columns={columns} data={data} />
+        <div class="form-section">
+          <h2>Add new observation</h2>
+          <form onSubmit={addObservation}>
+            Add Name<input value={newName} onChange={handleNameChange} />
+            Pick Rarity 
+              <select value={newRarity} onChange={handleRarityChange}>
+                <option value="common">Common</option>
+                <option value="rare">Rare</option>
+                <option value="extremely rare">Extremely Rare</option>
+              </select>
+            Add Notes <textarea rows="5" cols="25" value={newNotes} onChange={handleNotesChange}></textarea>
+            <br></br>
+            <button type="submit">Add Observation</button>
+          </form>
         </div>
-
-        <div>
-          <h3>Rarity</h3>
-          <select name="rarity" value={newRarity} onChange={handleRarityChange}>
-            <option value="common">Common</option>
-            <option value="rare">Rare</option>
-            <option value="extremely rare">Extremely Rare</option>
-          </select>
-        </div>
-
-        <h3>Notes</h3>
-        <textarea
-          rows="5"
-          cols="25"
-          value={newNotes}
-          onChange={handleNotesChange}
-        ></textarea>
-
-        <div>
-        <button type="submit">Add</button>
-        </div>
-      </form>
-    </Styles>
+      </Styles>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = "/api/observations"
+const baseUrl = "https://whispering-tundra-87610.herokuapp.com/api/observations"
 
 const getAll = () => {
     const request =  axios.get(baseUrl)

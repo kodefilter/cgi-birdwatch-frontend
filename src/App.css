@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    border: 1px black dotted;
+    padding: 5em;
+    background-color: lightgray
+  
+}
+
+.form-section form {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  height: 3em;
+
+  background-color: lightskyblue;
+}
