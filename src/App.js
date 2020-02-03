@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useTable, useSortBy } from "react-table";
 import observationService from "./services/observations";
+import Notification from './components/notification'
 import "./App.css";
 
 const Styles = styled.div`
@@ -103,6 +104,9 @@ const App = () => {
   const [newRarity, setNewRarity] = useState("common");
   const [newNotes, setNewNotes] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [successMessage, setSuccessMessage] = useState(null)
+
   useEffect(() => {
     observationService.getAll().then(initialObservations => {
       setObservations(initialObservations);
@@ -125,13 +129,23 @@ const App = () => {
         setObservations(observations.concat(addedObservation));
         setNewName("");
         setNewNotes("");
+
+        setSuccessMessage(`${addedObservation.name} has been added`)
+        setTimeout(()=>{
+          setSuccessMessage(null)
+        },3000)
+
       })
       .catch(error => {
         setNewName("");
         setNewNotes("");
+        setErrorMessage(error.response.data.error)
+        setTimeout(()=>{
+          setSuccessMessage(null)
+        },3000)
+
       });
 
-    //need to implement error or success message
   };
 
   const handleNameChange = event => {
@@ -178,6 +192,9 @@ const App = () => {
           order !
         </p>
         <h1>Bird Observation Table</h1>
+        
+        <Notification errorMessage={errorMessage} successMessage={successMessage} />
+
         <Table columns={columns} data={data} />
         <div class="form-section">
           <h2>Add new observation</h2>
