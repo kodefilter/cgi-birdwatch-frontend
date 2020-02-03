@@ -72,5 +72,5 @@ A common way to update is by doing
     $ npm install
     
 ## Libraries
-
-Here I am using [react-table](https://www.npmjs.com/package/react-table) to populate the data on the table.
+This project was created with create-react-app
+Here I am using [axios](https://www.npmjs.com/package/axios) to fetch the data from the backend and [react-table](https://www.npmjs.com/package/react-table) to populate the data on the table.
