@@ -148,6 +148,8 @@ const App = () => {
 
   };
 
+ 
+
   const handleNameChange = event => {
     setNewName(event.target.value);
   };
@@ -177,9 +179,51 @@ const App = () => {
       {
         Header: "Date",
         accessor: "timestamp"
-      }
+      },
+      {
+        Header: 'Delete',
+        id: 'delete',
+        accessor: (str) => 'delete',
+
+        //(tableProps.row.original.id)
+    Cell: (tableProps) => (
+      <span style={{cursor:'pointer',color:'blue',textDecoration:'underline'}}
+        onClick={() => {
+
+          const id = tableProps.row.original.id
+
+          const toBeDeletedObservation = observations.find(observation=>observation.id === id)
+
+    if (window.confirm(`Delete ${toBeDeletedObservation.name}`)) {
+      observationService
+          .deleteEntry(id)
+          .then( deletedObservation => {
+            setObservations(observations.filter(observation => observation.id !== deletedObservation.id ))
+            setSuccessMessage(`${toBeDeletedObservation.name} was deleted from the server`)
+            setTimeout(()=>{
+              setSuccessMessage(null)
+            }, 5000)
+
+          }).catch(error => {
+            
+            setErrorMessage(`the observation '${toBeDeletedObservation.name}' was already deleted from server`)
+            setObservations(observations.filter(p=>p.id !== toBeDeletedObservation.id))
+
+            setTimeout(()=>{
+              setErrorMessage(null)
+            }, 5000)
+
+          })
+    }
+
+
+        }}>
+       Delete
+      </span>
+    ),
+  },
     ],
-    []
+    [observations]
   );
 
   const data = React.useMemo(() => observations, [observations]);
