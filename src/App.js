@@ -185,11 +185,11 @@ const App = () => {
         id: 'delete',
         accessor: (str) => 'delete',
 
-        //(tableProps.row.original.id)
     Cell: (tableProps) => (
       <span style={{cursor:'pointer',color:'blue',textDecoration:'underline'}}
         onClick={() => {
 
+          // id of the object in table
           const id = tableProps.row.original.id
 
           const toBeDeletedObservation = observations.find(observation=>observation.id === id)
