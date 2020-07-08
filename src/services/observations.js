@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 const baseUrl = "https://pure-atoll-07080.herokuapp.com/api/observations"
 
 const getAll = async () => {
