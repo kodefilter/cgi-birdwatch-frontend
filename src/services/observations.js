@@ -18,7 +18,6 @@ const deleteEntry = async (id) => {
     const response = await request
     return response.data
 }
-//deleting, editing and getting single observation 
-//was not on the requirement but can be implemented very easily
+
 
 export default { getAll, create, deleteEntry }
