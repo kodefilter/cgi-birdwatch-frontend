@@ -1,17 +1,24 @@
 import axios from 'axios'
-const baseUrl = "https://whispering-tundra-87610.herokuapp.com/api/observations"
+const baseUrl = "http://localhost:3001/api/observations"
 
-const getAll = () => {
+const getAll = async () => {
     const request =  axios.get(baseUrl)
-    return request.then(response => response.data)
+    const response = await request
+    return response.data
 }
 
-const create = newObject => {
+const create = async newObject => {
     const request = axios.post(baseUrl, newObject)
-    return request.then(response => response.data)  
+    const response = await request
+    return response.data  
 }
 
+const deleteEntry = async (id) => {
+    const request = axios.delete(`${baseUrl}/${id}`)
+    const response = await request
+    return response.data
+}
 //deleting, editing and getting single observation 
 //was not on the requirement but can be implemented very easily
 
-export default { getAll, create }
+export default { getAll, create, deleteEntry }
